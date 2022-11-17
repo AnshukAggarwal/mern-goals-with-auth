@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const goalsRouter = require("./Routes/goalRoutes.js");
+const userRouter = require("./Routes/userRoutes");
 
 const port = process.env.PORT || 5000;
 const MONGODB_URL = process.env.DBURL;
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/goals", goalsRouter);
+app.use("/api/users", userRouter);
 
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true });
 
