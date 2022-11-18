@@ -68,8 +68,9 @@ const loginUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
+  console.log(req.user);
   try {
-    res.status(200).json({ message: "Get User Profile" });
+    res.status(200).json(req.user);
   } catch (error) {}
 };
 
