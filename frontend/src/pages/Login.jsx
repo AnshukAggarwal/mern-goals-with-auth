@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../UI/Button/Button";
 
 const Login = () => {
+  const [loginFormData, setLoginFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = loginFormData;
+
   const click = () => {
     console.log("Login clicked");
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginFormData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
+    console.log(loginFormData);
   };
   return (
     <>
@@ -24,6 +42,8 @@ const Login = () => {
             className="form-control"
             id="email"
             name="email"
+            value={email}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
@@ -35,6 +55,8 @@ const Login = () => {
             className="form-control"
             id="password"
             name="password"
+            value={password}
+            onChange={handleChange}
           />
         </div>
         <div>

@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../UI/Button/Button";
 
 const Register = () => {
+  const [registerFormData, setRegisterFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
+
+  const { name, email, password, password2 } = registerFormData;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setRegisterFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
   const click = () => {
     console.log("Register clicked");
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
+    console.log(registerFormData);
   };
   return (
     <>
@@ -19,7 +37,14 @@ const Register = () => {
           <label htmlFor="name" className="form-label">
             Name
           </label>
-          <input type="text" className="form-control" id="name" name="name" />
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            name="name"
+            value={name}
+            onChange={handleChange}
+          />
         </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -30,6 +55,8 @@ const Register = () => {
             className="form-control"
             id="email"
             name="email"
+            value={email}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
@@ -41,6 +68,8 @@ const Register = () => {
             className="form-control"
             id="password"
             name="password"
+            value={password}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
@@ -52,6 +81,8 @@ const Register = () => {
             className="form-control"
             id="password2"
             name="password2"
+            value={password2}
+            onChange={handleChange}
           />
         </div>
         <div>
