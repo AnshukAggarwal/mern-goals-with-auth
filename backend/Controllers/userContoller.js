@@ -1,14 +1,13 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../Models/userModel");
-const { use } = require("../Routes/goalRoutes");
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   //if any field is empty
   if (!name || !email || !password) {
-    res.status(400).json({ message: "data missing" });
+    res.status(400).json({ message: "Please fill in data in all the fields" });
   }
 
   //check if user exists
@@ -71,7 +70,9 @@ const getUser = async (req, res) => {
   console.log(req.user);
   try {
     res.status(200).json(req.user);
-  } catch (error) {}
+  } catch (error) {
+    res.status(404).json({ message: "User not found" });
+  }
 };
 
 //function to generate JWT

@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import { loginUserAsync, resetState } from "../redux/actions/authActions";
 import Button from "../UI/Button/Button";
+import Spinner from "../UI/Spinner/Spinner";
 
 const Login = () => {
   const [loginFormData, setLoginFormData] = useState({
@@ -9,9 +14,23 @@ const Login = () => {
 
   const { email, password } = loginFormData;
 
-  const click = () => {
-    console.log("Login clicked");
-  };
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { user, loading, error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: "top-center",
+      });
+    }
+
+    if (user) {
+      history.push("/");
+    }
+
+    dispatch(resetState());
+  }, [error, user, history]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,9 +44,19 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(loginFormData);
+    if (error) {
+      toast.error(error, {
+        position: "top-center",
+      });
+    } else {
+      dispatch(loginUserAsync(loginFormData));
+    }
+    // history.push("/");
   };
-  return (
+
+  return loading ? (
+    <Spinner />
+  ) : (
     <>
       <section>
         <h2>Login to access your account</h2>
@@ -60,9 +89,7 @@ const Login = () => {
           />
         </div>
         <div>
-          <Button type="submit" click={click}>
-            Login
-          </Button>
+          <Button type="submit">Login</Button>
         </div>
       </form>
     </>

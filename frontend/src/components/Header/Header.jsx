@@ -1,11 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { FaUser, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import styles from "./Header.module.css";
+import { logOut } from "../../redux/actions/authActions";
 
 const Header = () => {
-  const { user, loading, error } = useSelector((state) => state.auth);
-  console.log(user);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    dispatch(logOut());
+    Redirect("/login");
+  };
 
   return (
     <header
@@ -19,20 +27,20 @@ const Header = () => {
       <ul className="nav">
         {user ? (
           <li className="nav-item">
-            <Link to="/login" className="nav-link">
-              Logout
+            <Link to="/login" className="nav-link" onClick={handleLogOut}>
+              <FaSignOutAlt /> Logout
             </Link>
           </li>
         ) : (
           <>
             <li className="nav-item">
               <Link to="/login" className="nav-link">
-                Login
+                <FaSignInAlt /> Login
               </Link>
             </li>
             <li className="nav-item">
               <Link to="/register" className="nav-link">
-                Register
+                <FaUser /> Register
               </Link>
             </li>
           </>

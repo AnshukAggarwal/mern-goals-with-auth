@@ -1,4 +1,6 @@
 import { Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Dashboard from "./pages/Dashboard";
@@ -16,6 +18,7 @@ function App() {
           <Route path="/login" exact component={Login} />
         </Switch>
       </main>
+      <ToastContainer />
     </div>
   );
 }
