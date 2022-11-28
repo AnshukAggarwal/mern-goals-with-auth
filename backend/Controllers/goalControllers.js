@@ -12,10 +12,12 @@ const getGoals = async (req, res) => {
 
 const addGoal = async (req, res) => {
   const { text } = req.body;
+  console.log(`incoming ${text}`);
   const newGoal = new Goal({ text, user: req.user._id });
   try {
     await newGoal.save();
-    res.status(200).json(newGoal);
+    const updatedGoals = await Goal.find({ user: req.user._id });
+    res.status(200).json(updatedGoals);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

@@ -20,12 +20,6 @@ const Register = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error, {
-  //       position: "top-center",
-  //     });
-  // }, [error]);
   useEffect(() => {
     if (error) {
       toast.error(error, {
@@ -36,8 +30,10 @@ const Register = () => {
     if (user) {
       history.push("/");
     }
-    dispatch(resetState());
-  }, [error, user, history]);
+    return () => {
+      dispatch(resetState());
+    };
+  }, [error, user, history, dispatch]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +43,6 @@ const Register = () => {
       [name]: value,
     }));
   };
-  const click = () => {};
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -129,9 +124,7 @@ const Register = () => {
             {/* <button type="submit" className="btn btn-primary">
             Register
           </button> */}
-            <Button type="submit" click={click}>
-              Register
-            </Button>
+            <Button type="submit">Register</Button>
           </div>
         </form>
       </>

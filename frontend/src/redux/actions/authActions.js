@@ -40,7 +40,7 @@ export const loginUserAsync = (userCred) => {
 };
 
 export const logOut = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     try {
       dispatch({ type: "LOGOUT" });
       localStorage.removeItem("user");

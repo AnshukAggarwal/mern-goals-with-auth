@@ -28,9 +28,10 @@ const Login = () => {
     if (user) {
       history.push("/");
     }
-
-    dispatch(resetState());
-  }, [error, user, history]);
+    return () => {
+      dispatch(resetState());
+    };
+  }, [error, user, history, dispatch]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,7 +52,6 @@ const Login = () => {
     } else {
       dispatch(loginUserAsync(loginFormData));
     }
-    // history.push("/");
   };
 
   return loading ? (
