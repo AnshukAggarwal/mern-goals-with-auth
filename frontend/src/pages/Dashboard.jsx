@@ -8,7 +8,7 @@ import GoalItem from "../components/GoalItem/GoalItem";
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
-  const { goals } = useSelector((state) => state.goal);
+  const { goals, loading } = useSelector((state) => state.goal);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -31,17 +31,22 @@ const Dashboard = () => {
       <hr />
       <AddGoal />
       {/* {goals.length > 0 && goals.map((g) => <p key={g._id}>{g.text}</p>)} */}
-      <section>
-        {goals.length > 0 ? (
-          <>
-            {goals.map((goal) => (
-              <GoalItem key={goal._id} data={goal} />
-            ))}
-          </>
-        ) : (
-          <Spinner />
-        )}
-      </section>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <section>
+          {goals.length > 0 ? (
+            <>
+              <h2>My Goals</h2>
+              {goals.map((goal) => (
+                <GoalItem key={goal._id} data={goal} />
+              ))}
+            </>
+          ) : (
+            <h2>You have no goals yet</h2>
+          )}
+        </section>
+      )}
     </>
   );
 };

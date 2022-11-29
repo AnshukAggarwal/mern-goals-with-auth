@@ -5,6 +5,12 @@ import {
   GET_GOALS_START,
   GET_GOALS_SUCCESS,
   GET_GOALS_FAIL,
+  DELETE_GOAL_START,
+  DELETE_GOAL_SUCCESS,
+  DELETE_GOAL_FAIL,
+  UPDATE_GOAL_START,
+  UPDATE_GOAL_SUCCESS,
+  UPDATE_GOAL_FAIL,
 } from "../constants/goalConstants";
 
 const INITIAL_STATE = {
@@ -47,6 +53,44 @@ const goalReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case GET_GOALS_FAIL: {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    }
+    case DELETE_GOAL_START: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case DELETE_GOAL_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        goals: action.payload,
+      };
+    }
+    case DELETE_GOAL_FAIL: {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    }
+    case UPDATE_GOAL_START: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case UPDATE_GOAL_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        goals: action.payload,
+      };
+    }
+    case UPDATE_GOAL_FAIL: {
       return {
         ...state,
         error: action.payload,
