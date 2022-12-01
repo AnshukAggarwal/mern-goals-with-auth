@@ -13,7 +13,7 @@ export const addUserAsync = (userData) => {
     try {
       dispatch({ type: ADD_USER_START });
       const { data } = await axios.post("/api/users/register", userData);
-      localStorage.setItem("user", JSON.stringify(data));
+      //localStorage.setItem("user", JSON.stringify(data));
       // if (data) {
       //   localStorage.setItem("user", JSON.stringify(data));
       // }
@@ -29,9 +29,9 @@ export const loginUserAsync = (userCred) => {
     try {
       dispatch({ type: LOGIN_USER_START });
       const { data } = await axios.post("/api/users/login", userCred);
-      if (data) {
-        localStorage.setItem("user", JSON.stringify(data));
-      }
+      // if (data) {
+      //   localStorage.setItem("user", JSON.stringify(data));
+      // }
       dispatch({ type: LOGIN_USER_SUCCESS, payload: data });
     } catch (error) {
       dispatch({ type: LOGIN_USER_FAIL, payload: error.response.data.message });
@@ -40,10 +40,10 @@ export const loginUserAsync = (userCred) => {
 };
 
 export const logOut = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     try {
       dispatch({ type: "LOGOUT" });
-      localStorage.removeItem("user");
+      //localStorage.removeItem("user");
     } catch (error) {}
   };
 };

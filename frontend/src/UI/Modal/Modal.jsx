@@ -3,6 +3,7 @@ import styles from "./Modal.module.css";
 import { updateGoalAsync } from "../../redux/actions/goalActions";
 import { useDispatch } from "react-redux";
 import Button from "../Button/Button";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 const Modal = ({ type, hideModal, deleteGoal, goal }) => {
   const [goalText, setGoalText] = useState(goal.text);
@@ -60,8 +61,18 @@ const Modal = ({ type, hideModal, deleteGoal, goal }) => {
           </section>
           <section className={styles.actions}>
             {/* <button onClick={props.deleteMemory}>Yes</button> */}
-            <Button click={hideModal}>No</Button>
-            <Button click={deleteGoal}>Yes</Button>
+            <Button click={deleteGoal}>
+              <span className={styles.helper}>
+                <FaCheck />
+              </span>
+              <span className={styles.text}>Yes</span>
+            </Button>
+            <Button click={hideModal}>
+              <span className={styles.helper}>
+                <FaTimes />
+              </span>
+              <span className={styles.text}>No</span>
+            </Button>
           </section>
         </div>
       </>
@@ -70,3 +81,6 @@ const Modal = ({ type, hideModal, deleteGoal, goal }) => {
 };
 
 export default Modal;
+
+// FaHandPointDown
+// FaStop

@@ -2,3 +2,12 @@
   display: flex;
   justify-content: space-between;
 }
+
+/* Media queries */
+
+@media (max-width: 400px) {
+  .actions {
+    display: flex;
+    flex-direction: column;
+  }
+}

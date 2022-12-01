@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../UI/Button/Button";
-import { addGoalAsync, resetState } from "../../redux/actions/goalActions";
+import { addGoalAsync } from "../../redux/actions/goalActions";
 import styles from "./AddGoal.module.css";
 
 const AddGoal = () => {
   const [goal, setGoal] = useState("");
   const dispatch = useDispatch();
-  const { error, success } = useSelector((state) => state.goal);
-
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error, {
-  //       position: "top-center",
-  //     });
-  //   }
-  //   if (success) {
-  //     toast.success("Goal added", {
-  //       position: "top-center",
-  //     });
-  //   }
-  //   return () => {
-  //     dispatch(resetState());
-  //   };
-  // }, [dispatch, error, goal, success]);
+  const { error } = useSelector((state) => state.goal);
 
   const handleGoalTextChange = (e) => {
     setGoal(e.target.value);

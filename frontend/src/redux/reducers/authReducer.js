@@ -7,10 +7,10 @@ import {
   LOGIN_USER_SUCCESS,
 } from "../constants/authConstants";
 
-const user = JSON.parse(localStorage.getItem("user"));
+//const user = JSON.parse(localStorage.getItem("user"));
 
 const INITIAL_STATE = {
-  user: user ? user : null,
+  user: null,
   loading: false,
   error: null,
 };
