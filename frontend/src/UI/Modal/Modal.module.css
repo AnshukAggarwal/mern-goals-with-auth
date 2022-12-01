@@ -33,3 +33,27 @@
   display: flex;
   justify-content: space-between;
 }
+
+.helper {
+  display: none;
+}
+
+/* Media Queries */
+
+@media (max-width: 500px) {
+  .helper {
+    display: block;
+  }
+  .text {
+    display: none;
+  }
+  .actions {
+    width: 100%;
+  }
+
+  .modal {
+    width: 65%;
+    left: 20%;
+    height: 50vh;
+  }
+}

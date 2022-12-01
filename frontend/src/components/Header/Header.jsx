@@ -33,12 +33,12 @@ const Header = () => {
           </li>
         ) : (
           <>
-            <li className="nav-item">
+            <li className={`${styles.test} nav-item`}>
               <Link to="/login" className="nav-link">
                 <FaSignInAlt /> Login
               </Link>
             </li>
-            <li className="nav-item">
+            <li className={`${styles.test} nav-item`}>
               <Link to="/register" className="nav-link">
                 <FaUser /> Register
               </Link>
