@@ -7,11 +7,16 @@ import styles from "./AddGoal.module.css";
 
 const AddGoal = () => {
   const [goal, setGoal] = useState("");
+  const [dueDate, setDueDate] = useState("");
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.goal);
 
   const handleGoalTextChange = (e) => {
     setGoal(e.target.value);
+  };
+
+  const handleDueDateChange = (e) => {
+    setDueDate(e.target.value);
   };
 
   const handleAddGoal = (e) => {
@@ -21,8 +26,9 @@ const AddGoal = () => {
         position: "top-center",
       });
     }
-    dispatch(addGoalAsync({ text: goal }));
+    dispatch(addGoalAsync({ text: goal, dueDate: dueDate }));
     setGoal("");
+    setDueDate("");
   };
   return (
     <>
@@ -39,6 +45,19 @@ const AddGoal = () => {
             name="goal"
             value={goal}
             onChange={handleGoalTextChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="dueDate" className="form-label">
+            Due Date
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            id="dueDate"
+            name="dueDate"
+            value={dueDate}
+            onChange={handleDueDateChange}
           />
         </div>
         <div>

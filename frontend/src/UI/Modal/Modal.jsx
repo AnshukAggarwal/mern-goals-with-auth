@@ -6,17 +6,31 @@ import Button from "../Button/Button";
 import { FaCheck, FaTimes } from "react-icons/fa";
 
 const Modal = ({ type, hideModal, deleteGoal, goal }) => {
+  // Set the intial value for the due date in "yyyy-mm-dd" format
+  const dueDate = new Date(goal.dueDate);
+  const month = dueDate.getMonth() + 1;
+  const day =
+    dueDate.getDate() + 1 > 9
+      ? dueDate.getDate() + 1
+      : `0${dueDate.getDate() + 1}`;
+  const year = dueDate.getFullYear();
   const [goalText, setGoalText] = useState(goal.text);
+  const [goalDate, setGoalDate] = useState(`${year}-${month}-${day}`); // Template Literal to set date
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
+  const handleGoalTextChange = (e) => {
     setGoalText(e.target.value);
+  };
+
+  const handleGoalDateChange = (e) => {
+    setGoalDate(e.target.value);
   };
 
   const handleUpdateGoal = (e) => {
     e.preventDefault();
     const updatedGoal = {
       text: goalText,
+      dueDate: goalDate,
     };
     dispatch(updateGoalAsync(updatedGoal, goal._id));
   };
@@ -38,7 +52,20 @@ const Modal = ({ type, hideModal, deleteGoal, goal }) => {
                   id="upDatedGoal"
                   name="goal"
                   value={goalText}
-                  onChange={handleChange}
+                  onChange={handleGoalTextChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="upDateDueDate" className="form-label">
+                  Due Date
+                </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="upDateDueDate"
+                  name="upDateDueDate"
+                  value={goalDate}
+                  onChange={handleGoalDateChange}
                 />
               </div>
               <div>

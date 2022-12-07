@@ -11,9 +11,12 @@ const getGoals = async (req, res) => {
 };
 
 const addGoal = async (req, res) => {
-  const { text } = req.body;
-  console.log(`incoming ${text}`);
-  const newGoal = new Goal({ text, user: req.user._id });
+  const { text, dueDate } = req.body;
+  const newGoal = new Goal({
+    text,
+    user: req.user._id,
+    dueDate: new Date(dueDate).toString(),
+  });
   try {
     await newGoal.save();
     const updatedGoals = await Goal.find({ user: req.user._id });
@@ -24,8 +27,8 @@ const addGoal = async (req, res) => {
 };
 
 const editGoal = async (req, res) => {
-  console.log(req.body);
-  const { text } = req.body;
+  //console.log(req.body);
+  const { text, dueDate } = req.body;
   const { id } = req.params;
 
   const goalToUpdate = await Goal.findById(id);
@@ -33,6 +36,7 @@ const editGoal = async (req, res) => {
   const updatedGoal = {
     text: text,
     user: req.user._id,
+    dueDate: new Date(dueDate).toString(),
   };
 
   //find the logged in user
