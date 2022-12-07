@@ -11,6 +11,9 @@ const goalSchema = mongoose.Schema(
       type: String,
       required: [true, "Please enter a text value"],
     },
+    dueDate: {
+      type: Date,
+    },
   },
   {
     timestamps: true,
