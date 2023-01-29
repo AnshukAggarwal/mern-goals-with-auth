@@ -45,7 +45,7 @@ export const getUserGoals = () => {
         },
       };
       dispatch({ type: GET_GOALS_START });
-      console.log(await axios.get(`${API}`, config));
+
       const { data } = await axios.get(`${API}`, config);
       dispatch({ type: GET_GOALS_SUCCESS, payload: data });
     } catch (error) {

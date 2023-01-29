@@ -8,7 +8,10 @@ import { FaCheck, FaTimes } from "react-icons/fa";
 const Modal = ({ type, hideModal, deleteGoal, goal }) => {
   // Set the intial value for the due date in "yyyy-mm-dd" format
   const dueDate = new Date(goal.dueDate);
-  const month = dueDate.getMonth() + 1;
+  const month =
+    dueDate.getMonth() + 1 > 9
+      ? dueDate.getMonth() + 1
+      : `0${dueDate.getMonth() + 1}`;
   const day =
     dueDate.getDate() + 1 > 9
       ? dueDate.getDate() + 1
@@ -17,6 +20,7 @@ const Modal = ({ type, hideModal, deleteGoal, goal }) => {
   const [goalText, setGoalText] = useState(goal.text);
   const [goalDate, setGoalDate] = useState(`${year}-${month}-${day}`); // Template Literal to set date
   const dispatch = useDispatch();
+  console.log(goalDate);
 
   const handleGoalTextChange = (e) => {
     setGoalText(e.target.value);
